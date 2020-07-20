@@ -1,6 +1,6 @@
 package cn.ruiyeclub.manage.service;
 
-import cn.ruiyeclub.manage.dto.system.resource.ResourceDTO;
+import cn.ruiyeclub.manage.dto.param.ResourceParam;
 import cn.ruiyeclub.manage.entity.SysResource;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -14,16 +14,16 @@ public interface SysResourceService extends IService<SysResource> {
 
     /**
      * 添加资源
-     * @param dto
+     * @param resourceParam
      */
-    void add(ResourceDTO dto);
+    void add(ResourceParam resourceParam);
 
     /**
      * 更新资源
      * @param id
-     * @param dto
+     * @param resourceParam
      */
-    void update(String id,ResourceDTO dto);
+    void update(String id,ResourceParam resourceParam);
 
     /**
      * 删除资源

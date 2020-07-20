@@ -3,7 +3,7 @@ package cn.ruiyeclub.manage.controller;
 import cn.ruiyeclub.common.annotation.SysLogs;
 import cn.ruiyeclub.common.bean.ResponseCode;
 import cn.ruiyeclub.common.bean.ResponseResult;
-import cn.ruiyeclub.manage.dto.system.log.FindLogDTO;
+import cn.ruiyeclub.manage.dto.param.PageParam;
 import cn.ruiyeclub.manage.service.SysLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -44,8 +44,8 @@ public class LogController{
     @ApiOperation(value = "获取所有的日志列表")
     @SysLogs("获取所有的资源列表")
     @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
-    public ResponseResult list(FindLogDTO findLogDTO){
-        return ResponseResult.e(ResponseCode.OK,sysLogService.listPage(findLogDTO));
+    public ResponseResult list(PageParam pageParam){
+        return ResponseResult.e(ResponseCode.OK,sysLogService.listPage(pageParam));
     }
 
 }

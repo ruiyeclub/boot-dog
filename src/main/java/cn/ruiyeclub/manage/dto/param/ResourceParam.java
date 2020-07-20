@@ -1,4 +1,4 @@
-package cn.ruiyeclub.manage.dto.system.resource;
+package cn.ruiyeclub.manage.dto.param;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * @version 2018/4/22
  */
 @Data
-public class ResourceDTO {
+public class ResourceParam {
 
     @NotBlank(message = "资源名称不能为空")
     private String name;

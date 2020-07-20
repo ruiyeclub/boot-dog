@@ -1,9 +1,9 @@
 package cn.ruiyeclub.manage.controller;
 
 import cn.ruiyeclub.common.annotation.SysLogs;
-import cn.ruiyeclub.common.bean.ResponseResult;
 import cn.ruiyeclub.common.bean.ResponseCode;
-import cn.ruiyeclub.manage.dto.system.resource.ResourceDTO;
+import cn.ruiyeclub.common.bean.ResponseResult;
+import cn.ruiyeclub.manage.dto.param.ResourceParam;
 import cn.ruiyeclub.manage.service.SysResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -42,8 +42,8 @@ public class ResourceController {
     @ApiOperation(value = "添加资源")
     @SysLogs("添加资源")
     @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
-    public ResponseResult add(@RequestBody @Validated @ApiParam("资源数据") ResourceDTO dto){
-        resourceService.add(dto);
+    public ResponseResult add(@RequestBody @Validated @ApiParam("资源数据") ResourceParam resourceParam){
+        resourceService.add(resourceParam);
         return ResponseResult.e(ResponseCode.OK);
     }
 
@@ -53,8 +53,8 @@ public class ResourceController {
     @SysLogs("添加资源")
     @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult update(@PathVariable("id") @ApiParam("资源ID") String id,
-                                 @RequestBody @Validated @ApiParam("资源数据") ResourceDTO dto){
-        resourceService.update(id,dto);
+                                 @RequestBody @Validated @ApiParam("资源数据") ResourceParam resourceParam){
+        resourceService.update(id,resourceParam);
         return ResponseResult.e(ResponseCode.OK);
     }
 

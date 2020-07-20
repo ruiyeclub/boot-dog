@@ -3,9 +3,9 @@ package cn.ruiyeclub.common.aspect;
 import cn.ruiyeclub.common.annotation.SysLogs;
 import cn.ruiyeclub.common.shiro.jwt.JwtToken;
 import cn.ruiyeclub.common.util.IpUtils;
-import cn.ruiyeclub.manage.dto.SignInDTO;
-import cn.ruiyeclub.manage.dto.system.user.ResetPasswordDTO;
-import cn.ruiyeclub.manage.dto.system.user.UserAddDTO;
+import cn.ruiyeclub.manage.dto.param.SignInParam;
+import cn.ruiyeclub.manage.dto.param.ResetPasswordParam;
+import cn.ruiyeclub.manage.dto.param.UserAddParam;
 import cn.ruiyeclub.manage.entity.SysLog;
 import cn.ruiyeclub.manage.service.SysLogService;
 import com.alibaba.fastjson.JSON;
@@ -99,20 +99,20 @@ public class SysLogAspect {
         final String filterString = "******";
         if(params.length>0){
             for (int i = 0; i < params.length; i++) {
-                if(params[i] instanceof SignInDTO){
-                    SignInDTO sign = (SignInDTO) params[i];
+                if(params[i] instanceof SignInParam){
+                    SignInParam sign = (SignInParam) params[i];
                     sign.setPassword(filterString);
                     params[i] = sign;
                 }
-                if(params[i] instanceof UserAddDTO){
-                    UserAddDTO userAddDTO = (UserAddDTO) params[i];
-                    userAddDTO.setPassword(filterString);
-                    params[i] = userAddDTO;
+                if(params[i] instanceof UserAddParam){
+                    UserAddParam userAddParam = (UserAddParam) params[i];
+                    userAddParam.setPassword(filterString);
+                    params[i] = userAddParam;
                 }
-                if(params[i] instanceof ResetPasswordDTO){
-                    ResetPasswordDTO resetPasswordDTO = (ResetPasswordDTO) params[i];
-                    resetPasswordDTO.setPassword(filterString);
-                    params[i] = resetPasswordDTO;
+                if(params[i] instanceof ResetPasswordParam){
+                    ResetPasswordParam resetPasswordParam = (ResetPasswordParam) params[i];
+                    resetPasswordParam.setPassword(filterString);
+                    params[i] = resetPasswordParam;
                 }
             }
         }

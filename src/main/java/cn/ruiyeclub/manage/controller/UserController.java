@@ -3,10 +3,7 @@ package cn.ruiyeclub.manage.controller;
 import cn.ruiyeclub.common.bean.ResponseResult;
 import cn.ruiyeclub.common.bean.ResponseCode;
 import cn.ruiyeclub.common.annotation.SysLogs;
-import cn.ruiyeclub.manage.dto.system.user.FindUserDTO;
-import cn.ruiyeclub.manage.dto.system.user.ResetPasswordDTO;
-import cn.ruiyeclub.manage.dto.system.user.UserAddDTO;
-import cn.ruiyeclub.manage.dto.system.user.UserUpdateDTO;
+import cn.ruiyeclub.manage.dto.param.*;
 import cn.ruiyeclub.manage.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -35,8 +32,8 @@ public class UserController {
     @ApiOperation(value = "分页获取用户数据")
     @SysLogs("分页获取用户数据")
     @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
-    public ResponseResult get(@RequestBody @Validated @ApiParam(value = "用户获取过滤条件") FindUserDTO findUserDTO){
-        return ResponseResult.e(ResponseCode.OK,userService.getAllUserBySplitPage(findUserDTO));
+    public ResponseResult get(@RequestBody @Validated @ApiParam(value = "用户获取过滤条件") PageParam pageParam){
+        return ResponseResult.e(ResponseCode.OK,userService.getAllUserBySplitPage(pageParam));
     }
 
     @PostMapping(value = {"/get/id/{id}"})
@@ -80,7 +77,7 @@ public class UserController {
     @ApiOperation(value = "添加用户")
     @SysLogs("添加用户")
     @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
-    public ResponseResult add(@RequestBody @Validated @ApiParam(value = "用户数据") UserAddDTO addDTO){
+    public ResponseResult add(@RequestBody @Validated @ApiParam(value = "用户数据") UserAddParam addDTO){
         userService.add(addDTO);
         return ResponseResult.e(ResponseCode.OK);
     }
@@ -91,7 +88,7 @@ public class UserController {
     @SysLogs("更新用户")
     @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult update(@PathVariable("id") @ApiParam(value = "用户标识ID") String id,
-                                 @RequestBody @Validated @ApiParam(value = "用户数据") UserUpdateDTO updateDTO){
+                                 @RequestBody @Validated @ApiParam(value = "用户数据") UserUpdateParam updateDTO){
         userService.update(id,updateDTO);
         return ResponseResult.e(ResponseCode.OK);
     }
@@ -102,7 +99,7 @@ public class UserController {
     @SysLogs("重置密码")
     @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult resetPassword(@RequestBody
-                                           @Validated @ApiParam(value = "用户及密码数据") ResetPasswordDTO dto){
+                                           @Validated @ApiParam(value = "用户及密码数据") ResetPasswordParam dto){
         userService.resetPassword(dto);
         return ResponseResult.e(ResponseCode.OK);
     }

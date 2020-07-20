@@ -1,9 +1,9 @@
 package cn.ruiyeclub.manage.service.impl;
 
 import cn.ruiyeclub.common.exception.RequestException;
-import cn.ruiyeclub.manage.dto.system.role.FindRoleDTO;
-import cn.ruiyeclub.manage.dto.system.role.RoleAddDTO;
-import cn.ruiyeclub.manage.dto.system.role.RoleUpdateDTO;
+import cn.ruiyeclub.manage.dto.param.FindRoleParam;
+import cn.ruiyeclub.manage.dto.param.RoleAddParam;
+import cn.ruiyeclub.manage.dto.param.RoleUpdateParam;
 import cn.ruiyeclub.manage.entity.SysResource;
 import cn.ruiyeclub.manage.entity.SysRole;
 import cn.ruiyeclub.manage.entity.SysRoleResource;
@@ -57,12 +57,12 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     }
 
     @Override
-    public IPage<SysRole> listPage(FindRoleDTO findRoleDTO) {
+    public IPage<SysRole> listPage(FindRoleParam findRoleParam) {
         QueryWrapper<SysRole> wrapper = new QueryWrapper<>();
         wrapper.orderByAsc("id");
-        Page<SysRole> rolePage = this.page(new Page<>(findRoleDTO.getPage(),
-                findRoleDTO.getPageSize()), wrapper);
-        if(findRoleDTO.getHasResource()){
+        Page<SysRole> rolePage = this.page(new Page<>(findRoleParam.getPage(),
+                findRoleParam.getPageSize()), wrapper);
+        if(findRoleParam.getHasResource()){
             if(rolePage.getRecords()!=null){
                 rolePage.getRecords().forEach(v->
                         v.setResources(roleResourceService.findAllResourceByRoleId(v.getId())));
@@ -87,15 +87,15 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     }
 
     @Override
-    public void update(String rid, RoleUpdateDTO roleUpdateDTO) {
+    public void update(String rid, RoleUpdateParam roleUpdateParam) {
         SysRole role = this.getById(rid);
         if(role==null){ throw RequestException.fail("角色不存在！");}
-        BeanUtils.copyProperties(roleUpdateDTO,role);
+        BeanUtils.copyProperties(roleUpdateParam,role);
         try {
             this.updateById(role);
             roleResourceService.remove(new QueryWrapper<SysRoleResource>()
                     .eq("rid",rid));
-            for (SysResource sysResource : roleUpdateDTO.getResources()) {
+            for (SysResource sysResource : roleUpdateParam.getResources()) {
                 roleResourceService.save(SysRoleResource.builder()
                         .pid(sysResource.getId())
                         .rid(role.getId())
@@ -109,7 +109,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     }
 
     @Override
-    public void add(RoleAddDTO addDTO) {
+    public void add(RoleAddParam addDTO) {
         SysRole role = this.getOne(new QueryWrapper<SysRole>().eq("name",addDTO.getName()));
         if(role!=null){
             throw RequestException.fail(

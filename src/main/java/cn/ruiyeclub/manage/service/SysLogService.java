@@ -1,6 +1,6 @@
 package cn.ruiyeclub.manage.service;
 
-import cn.ruiyeclub.manage.dto.system.log.FindLogDTO;
+import cn.ruiyeclub.manage.dto.param.PageParam;
 import cn.ruiyeclub.manage.entity.SysLog;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface SysLogService extends IService<SysLog>{
 
-    IPage<SysLog> listPage(FindLogDTO findLogDTO);
+    IPage<SysLog> listPage(PageParam pageParam);
 
     void remove(List<String> idList);
 

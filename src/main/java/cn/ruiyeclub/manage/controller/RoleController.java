@@ -3,7 +3,7 @@ package cn.ruiyeclub.manage.controller;
 import cn.ruiyeclub.common.annotation.SysLogs;
 import cn.ruiyeclub.common.bean.ResponseCode;
 import cn.ruiyeclub.common.bean.ResponseResult;
-import cn.ruiyeclub.manage.dto.system.role.FindRoleDTO;
+import cn.ruiyeclub.manage.dto.param.FindRoleParam;
 import cn.ruiyeclub.manage.service.SysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -36,8 +36,8 @@ public class RoleController{
     @ApiOperation(value = "分页获取角色数据")
     @SysLogs("分页获取角色数据")
     @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
-    public ResponseResult get(@RequestBody @Validated @ApiParam(value = "用户获取过滤条件") FindRoleDTO findRoleDTO){
-        return ResponseResult.e(ResponseCode.OK,sysRoleService.listPage(findRoleDTO));
+    public ResponseResult get(@RequestBody @Validated @ApiParam(value = "用户获取过滤条件") FindRoleParam findRoleParam){
+        return ResponseResult.e(ResponseCode.OK,sysRoleService.listPage(findRoleParam));
     }
 
     //TODO 修改用户权限

@@ -1,18 +1,15 @@
-package cn.ruiyeclub.manage.dto;
+package cn.ruiyeclub.manage.dto.param;
 
 import lombok.Data;
 
 /**
- * @author Licoy
- * @version 2018/4/18/14:17
+ * @author Ray。
+ * @date 2020/7/20 19:49
  */
 @Data
-public abstract class SplitPageDTO {
+public class PageParam {
 
     private Integer page = 1;
-
     private Integer pageSize = 10;
-
     private Boolean asc = false;
-
 }

@@ -1,4 +1,4 @@
-package cn.ruiyeclub.manage.dto.system.role;
+package cn.ruiyeclub.manage.dto.param;
 
 import cn.ruiyeclub.manage.entity.SysResource;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.util.List;
  * @version 2018/4/19/14:28
  */
 @Data
-public class RoleAddDTO {
+public class RoleAddParam {
 
     @NotBlank(message = "姓名不能为空")
     private String name;

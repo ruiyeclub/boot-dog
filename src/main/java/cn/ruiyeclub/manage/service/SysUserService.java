@@ -1,14 +1,10 @@
 package cn.ruiyeclub.manage.service;
 
-import cn.ruiyeclub.manage.dto.SignInDTO;
-import cn.ruiyeclub.manage.dto.system.user.FindUserDTO;
-import cn.ruiyeclub.manage.dto.system.user.ResetPasswordDTO;
-import cn.ruiyeclub.manage.dto.system.user.UserAddDTO;
-import cn.ruiyeclub.manage.dto.system.user.UserUpdateDTO;
+import cn.ruiyeclub.manage.dto.param.*;
 import cn.ruiyeclub.manage.entity.SysResource;
 import cn.ruiyeclub.manage.entity.SysRole;
 import cn.ruiyeclub.manage.entity.SysUser;
-import cn.ruiyeclub.manage.vo.SysUserVO;
+import cn.ruiyeclub.manage.dto.result.SysUserResult;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -32,15 +28,15 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 用户登录操作
-     * @param signInDTO 登录信息
+     * @param SignInParam 登录信息
      */
-    void signIn(SignInDTO signInDTO);
+    void signIn(SignInParam signInParam);
 
     /**
      * 获取当前登录用户信息
      * @return UserVO
      */
-    SysUserVO getCurrentUser();
+    SysUserResult getCurrentUser();
 
     /**
      * 获取当前登录用户所有的权限标示
@@ -58,10 +54,10 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 获取所有用户（分页）
-     * @param findUserDTO 过滤条件
+     * @param pageParam 过滤条件
      * @return RequestResult
      */
-    IPage<SysUserVO> getAllUserBySplitPage(FindUserDTO findUserDTO);
+    IPage<SysUserResult> getAllUserBySplitPage(PageParam pageParam);
 
     /**
      * 用户状态改变
@@ -80,14 +76,14 @@ public interface SysUserService extends IService<SysUser> {
      * 添加用户
      * @param addDTO 用户数据DTO
      */
-    void add(UserAddDTO addDTO);
+    void add(UserAddParam addDTO);
 
     /**
      * 更新用户数据
      * @param id 用户id
      * @param updateDTO 用户数据DTO
      */
-    void update(String id, UserUpdateDTO updateDTO);
+    void update(String id, UserUpdateParam updateDTO);
 
     /**
      * 更新用户角色关联
@@ -98,7 +94,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 重置用户密码
-     * @param resetPasswordDTO
+     * @param resetPasswordParam
      */
-    void resetPassword(ResetPasswordDTO resetPasswordDTO);
+    void resetPassword(ResetPasswordParam resetPasswordParam);
 }

@@ -5,7 +5,7 @@ import cn.ruiyeclub.common.annotation.SysLogs;
 import cn.ruiyeclub.common.bean.ResponseCode;
 import cn.ruiyeclub.common.bean.ResponseResult;
 import cn.ruiyeclub.common.shiro.jwt.JwtToken;
-import cn.ruiyeclub.manage.dto.SignInDTO;
+import cn.ruiyeclub.manage.dto.param.SignInParam;
 import cn.ruiyeclub.manage.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -37,9 +37,8 @@ public class AccountController {
     @PostMapping(value = {"/sign-in"})
     @ApiOperation(value = "登录")
     @SysLogs("登录")
-    public ResponseResult signIn(@RequestBody @Validated @ApiParam(value = "登录数据",required = true)
-                                         SignInDTO signInDTO){
-        userService.signIn(signInDTO);
+    public ResponseResult signIn(@RequestBody @Validated @ApiParam(value = "登录数据",required = true) SignInParam signInParam){
+        userService.signIn(signInParam);
         return ResponseResult.e(ResponseCode.SIGN_IN_OK,((JwtToken)SecurityUtils.getSubject().getPrincipal()).getToken());
     }
 

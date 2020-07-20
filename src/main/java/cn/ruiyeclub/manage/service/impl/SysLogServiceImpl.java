@@ -2,7 +2,7 @@ package cn.ruiyeclub.manage.service.impl;
 
 import cn.ruiyeclub.common.bean.ResponseCode;
 import cn.ruiyeclub.common.exception.RequestException;
-import cn.ruiyeclub.manage.dto.system.log.FindLogDTO;
+import cn.ruiyeclub.manage.dto.param.PageParam;
 import cn.ruiyeclub.manage.entity.SysLog;
 import cn.ruiyeclub.manage.mapper.SysLogMapper;
 import cn.ruiyeclub.manage.service.SysLogService;
@@ -22,10 +22,10 @@ import java.util.List;
 public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> implements SysLogService {
 
     @Override
-    public IPage<SysLog> listPage(FindLogDTO findLogDTO) {
+    public IPage<SysLog> listPage(PageParam pageParam) {
         QueryWrapper<SysLog> wrapper = new QueryWrapper<>();
-        wrapper.orderByAsc(findLogDTO.getAsc());
-        return this.page(new Page<>(findLogDTO.getPage(),findLogDTO.getPageSize()),wrapper);
+        wrapper.orderByAsc(pageParam.getAsc());
+        return this.page(new Page<>(pageParam.getPage(),pageParam.getPageSize()),wrapper);
     }
 
     @Override

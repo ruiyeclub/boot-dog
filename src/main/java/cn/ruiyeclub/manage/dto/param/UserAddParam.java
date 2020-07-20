@@ -1,4 +1,4 @@
-package cn.ruiyeclub.manage.dto.system.user;
+package cn.ruiyeclub.manage.dto.param;
 
 import cn.ruiyeclub.manage.entity.SysRole;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.util.List;
  * @version 2018/4/24/16:40
  */
 @Data
-public class UserAddDTO {
+public class UserAddParam {
 
     @NotBlank(message = "用户名不能为空")
     @Pattern(regexp = "^(\\w){4,16}$",message = "用户名应为[A-Za-z0-9_]组成的4-16位字符！")

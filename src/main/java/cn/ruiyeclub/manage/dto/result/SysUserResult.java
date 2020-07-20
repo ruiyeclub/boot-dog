@@ -1,4 +1,4 @@
-package cn.ruiyeclub.manage.vo;
+package cn.ruiyeclub.manage.dto.result;
 
 import cn.ruiyeclub.manage.entity.SysResource;
 import cn.ruiyeclub.manage.entity.SysRole;
@@ -12,7 +12,7 @@ import java.util.List;
  * @version 2018/4/18/11:34
  */
 @Data
-public class SysUserVO {
+public class SysUserResult {
 
     private String id;
     private String username;

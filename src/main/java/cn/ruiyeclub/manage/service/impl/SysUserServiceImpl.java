@@ -3,24 +3,16 @@ package cn.ruiyeclub.manage.service.impl;
 import cn.ruiyeclub.common.bean.ResponseCode;
 import cn.ruiyeclub.common.exception.RequestException;
 import cn.ruiyeclub.common.shiro.jwt.JwtToken;
-import cn.ruiyeclub.common.util.MD5EncryptUtil;
 import cn.ruiyeclub.common.util.IpUtils;
-import cn.ruiyeclub.manage.dto.SignInDTO;
-import cn.ruiyeclub.manage.dto.system.user.FindUserDTO;
-import cn.ruiyeclub.manage.dto.system.user.ResetPasswordDTO;
-import cn.ruiyeclub.manage.dto.system.user.UserAddDTO;
-import cn.ruiyeclub.manage.dto.system.user.UserUpdateDTO;
+import cn.ruiyeclub.common.util.MD5EncryptUtil;
+import cn.ruiyeclub.manage.dto.param.*;
 import cn.ruiyeclub.manage.entity.SysResource;
 import cn.ruiyeclub.manage.entity.SysRole;
 import cn.ruiyeclub.manage.entity.SysUser;
 import cn.ruiyeclub.manage.entity.SysUserRole;
 import cn.ruiyeclub.manage.mapper.SysUserMapper;
-import cn.ruiyeclub.manage.service.ShiroService;
-import cn.ruiyeclub.manage.service.SysResourceService;
-import cn.ruiyeclub.manage.service.SysRoleService;
-import cn.ruiyeclub.manage.service.SysUserRoleService;
-import cn.ruiyeclub.manage.service.SysUserService;
-import cn.ruiyeclub.manage.vo.SysUserVO;
+import cn.ruiyeclub.manage.service.*;
+import cn.ruiyeclub.manage.dto.result.SysUserResult;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -74,11 +66,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> imple
     }
 
     @Override
-    public void signIn(SignInDTO signInDTO) {
-        if( "".equals(signInDTO.getUsername()) || "".equals(signInDTO.getPassword()) ){
+    public void signIn(SignInParam signInParam) {
+        if( "".equals(signInParam.getUsername()) || "".equals(signInParam.getPassword()) ){
             throw new RequestException(ResponseCode.SING_IN_INPUT_EMPTY);
         }
-        JwtToken token = new JwtToken(null,signInDTO.getUsername(),signInDTO.getPassword());
+        JwtToken token = new JwtToken(null,signInParam.getUsername(),signInParam.getPassword());
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
@@ -94,7 +86,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> imple
 
 
     @Override
-    public SysUserVO getCurrentUser(){
+    public SysUserResult getCurrentUser(){
         IpUtils.executeLogin();
         Subject subject = SecurityUtils.getSubject();
         if(!subject.isAuthenticated()){
@@ -112,7 +104,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> imple
         }
         //获取菜单/权限信息
         List<SysResource> allPer = userRolesRegexResource(roleService.findAllRoleByUserId(user.getId(),true));
-        SysUserVO vo = new SysUserVO();
+        SysUserResult vo = new SysUserResult();
         BeanUtils.copyProperties(user,vo);
         vo.setResources(allPer);
         return vo;
@@ -172,16 +164,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> imple
     }
 
     @Override
-    public IPage<SysUserVO> getAllUserBySplitPage(FindUserDTO findUserDTO) {
+    public IPage<SysUserResult> getAllUserBySplitPage(PageParam pageParam) {
         QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
         wrapper.orderByAsc("create_date");
-        Page<SysUser> userPage = this.page(new Page<>(findUserDTO.getPage(),
-                findUserDTO.getPageSize()), wrapper);
-        Page<SysUserVO> userVOPage = new Page<>();
+        Page<SysUser> userPage = this.page(new Page<>(pageParam.getPage(),
+                pageParam.getPageSize()), wrapper);
+        Page<SysUserResult> userVOPage = new Page<>();
         BeanUtils.copyProperties(userPage,userVOPage);
-        List<SysUserVO> userVOS = new ArrayList<>();
+        List<SysUserResult> userVOS = new ArrayList<>();
         userPage.getRecords().forEach(v->{
-            SysUserVO vo = new SysUserVO();
+            SysUserResult vo = new SysUserResult();
             BeanUtils.copyProperties(v,vo);
             //查找匹配所有用户的角色
             vo.setRoles(roleService.findAllRoleByUserId(v.getId(),false));
@@ -235,7 +227,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> imple
     }
 
     @Override
-    public void add(UserAddDTO addDTO) {
+    public void add(UserAddParam addDTO) {
         SysUser findUser = this.findUserByName(addDTO.getUsername(),false);
         if(findUser!=null){
             throw RequestException.fail(
@@ -254,7 +246,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> imple
     }
 
     @Override
-    public void update(String id, UserUpdateDTO updateDTO) {
+    public void update(String id, UserUpdateParam updateDTO) {
         SysUser user = this.getById(id);
         if(user==null){
             throw RequestException.fail(
@@ -293,18 +285,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> imple
     }
 
     @Override
-    public void resetPassword(ResetPasswordDTO resetPasswordDTO){
-        SysUser user = this.getById(resetPasswordDTO.getUid().trim());
+    public void resetPassword(ResetPasswordParam resetPasswordParam){
+        SysUser user = this.getById(resetPasswordParam.getUid().trim());
         if(user==null){
-            throw RequestException.fail(String.format("不存在ID为 %s 的用户",resetPasswordDTO.getUid()));
+            throw RequestException.fail(String.format("不存在ID为 %s 的用户", resetPasswordParam.getUid()));
         }
-        String password = MD5EncryptUtil.encrypt((resetPasswordDTO.getPassword())+user.getUsername());
+        String password = MD5EncryptUtil.encrypt((resetPasswordParam.getPassword())+user.getUsername());
         user.setPassword(password);
         try {
             this.updateById(user);
             shiroService.clearAuthByUserId(user.getId());
         }catch (Exception e){
-            throw RequestException.fail(String.format("ID为 %s 的用户密码重置失败",resetPasswordDTO.getUid()),e);
+            throw RequestException.fail(String.format("ID为 %s 的用户密码重置失败", resetPasswordParam.getUid()),e);
         }
     }
 }

@@ -1,8 +1,8 @@
 package cn.ruiyeclub.manage.service;
 
-import cn.ruiyeclub.manage.dto.system.role.FindRoleDTO;
-import cn.ruiyeclub.manage.dto.system.role.RoleAddDTO;
-import cn.ruiyeclub.manage.dto.system.role.RoleUpdateDTO;
+import cn.ruiyeclub.manage.dto.param.FindRoleParam;
+import cn.ruiyeclub.manage.dto.param.RoleAddParam;
+import cn.ruiyeclub.manage.dto.param.RoleUpdateParam;
 import cn.ruiyeclub.manage.entity.SysRole;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -26,11 +26,11 @@ public interface SysRoleService extends IService<SysRole> {
      */
     void updateCache(SysRole role,Boolean author, Boolean out);
 
-    IPage<SysRole> listPage(FindRoleDTO findRoleDTO);
+    IPage<SysRole> listPage(FindRoleParam findRoleParam);
 
     void removeWithId(String rid);
 
-    void update(String rid, RoleUpdateDTO roleUpdateDTO);
+    void update(String rid, RoleUpdateParam roleUpdateParam);
 
-    void add(RoleAddDTO addDTO);
+    void add(RoleAddParam addDTO);
 }

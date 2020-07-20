@@ -1,7 +1,7 @@
 package cn.ruiyeclub.manage.service.impl;
 
 import cn.ruiyeclub.common.exception.RequestException;
-import cn.ruiyeclub.manage.dto.system.resource.ResourceDTO;
+import cn.ruiyeclub.manage.dto.param.ResourceParam;
 import cn.ruiyeclub.manage.entity.SysResource;
 import cn.ruiyeclub.manage.mapper.SysResourceMapper;
 import cn.ruiyeclub.manage.service.ShiroService;
@@ -45,20 +45,20 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
     }
 
     @Override
-    public void add(ResourceDTO dto) {
+    public void add(ResourceParam resourceParam) {
         SysResource resource = new SysResource();
-        BeanUtils.copyProperties(dto,resource);
+        BeanUtils.copyProperties(resourceParam,resource);
         resource.setCreateDate(new Date());
         this.save(resource);
         shiroService.reloadPerms();
     }
 
     @Override
-    public void update(String id, ResourceDTO dto) {
+    public void update(String id, ResourceParam resourceParam) {
         SysResource resource = this.getById(id);
         if(resource==null){
             throw RequestException.fail("更新失败，不存在ID为"+id+"的资源");}
-        BeanUtils.copyProperties(dto,resource);
+        BeanUtils.copyProperties(resourceParam,resource);
         this.updateById(resource);
         shiroService.reloadPerms();
     }
