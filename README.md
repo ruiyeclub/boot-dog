@@ -4,6 +4,8 @@ boot-dog前身watchdog-framework，原地址https://github.com/watchdog-framewor
     Spring Boot to 2.1.6
     Mybatis-Plus to 3.3.2
     Shiro to 1.5.3
+    jedis to lettuce
+    HikariCP to Druid
     ...
 ```
 
