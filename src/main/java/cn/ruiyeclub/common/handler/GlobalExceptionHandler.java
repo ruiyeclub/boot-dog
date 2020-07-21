@@ -16,11 +16,11 @@ import java.util.List;
 
 /**
  * @author Ray。
- * @date  2017/11/18
+ * @date  2019/11/18
  */
 @RestControllerAdvice(basePackages = {"cn.ruiyeclub"})
 @Slf4j
-public class GlobalDefaultExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = RequestException.class)
     public ResponseResult requestExceptionHandler(RequestException e){
@@ -50,10 +50,5 @@ public class GlobalDefaultExceptionHandler {
         e.printStackTrace();
         return ResponseResult.builder().msg("服务器飘了，管理员去拿刀修理了~").status(ResponseCode.FAIL.code).build();
     }
-
-
-
-
-
 
 }

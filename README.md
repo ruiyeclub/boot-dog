@@ -40,10 +40,10 @@ Mybatis-Plus | ORM框架 | 3.3.2 |  [http://mp.baomidou.com/](http://mp.baomidou
 Maven | 项目构建管理 | 3.6 |  [http://maven.apache.org](http://maven.apache.org/)
 Apache Shiro | 安全框架 | 1.5.3 |  [http://shiro.apache.org](http://www.mybatis.org/generator/index.html)
 Lombok | 工具 | 1.18.12 |  [https://www.projectlombok.org/](https://www.projectlombok.org/)
-HikariCP | 数据库连接池 | 2.7.8 |  [http://brettwooldridge.github.io/HikariCP/](http://brettwooldridge.github.io/HikariCP/)
+Druid | 阿里巴巴数据库连接池 | 1.1.23 |  [https://github.com/alibaba/druid/](https://github.com/alibaba/druid/)
 Shiro-Redis | shiro缓存工具 | 2.8.24 | [https://github.com/alexxiyang/shiro-redis](https://github.com/alexxiyang/shiro-redis)
 Springfox-Swagger2 | api文档工具 | 2.9.2 | [https://github.com/springfox/springfox](https://github.com/springfox/springfox)
-jwt | 身份认证 | 3.2.0 | [https://jwt.io/](https://jwt.io/)
+jwt | 身份认证 | 3.10.3 | [https://jwt.io/](https://jwt.io/)
 ## 前端技术
 技术 | 类型 | 版本 | 官网
 ----|------|----|----
