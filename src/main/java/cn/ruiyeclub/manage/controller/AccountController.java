@@ -45,7 +45,6 @@ public class AccountController {
     @PostMapping(value = "/current")
     @ApiOperation(value = "获取当前用户信息")
     @SysLogs("获取当前用户信息")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult current(){
         return ResponseResult.e(ResponseCode.OK, userService.getCurrentUser());
     }
@@ -53,7 +52,6 @@ public class AccountController {
     @PostMapping(value = "/logout")
     @ApiOperation(value = "注销登录")
     @SysLogs("注销登录")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult logout(){
         try {
             Subject subject = SecurityUtils.getSubject();
@@ -66,7 +64,6 @@ public class AccountController {
 
     @PostMapping(value = "/all-permission-tag")
     @ApiOperation(value = "获取所有的权限标示")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult<List<String>> getAllPermissionTag(@JwtClaim String t){
         return ResponseResult.e(ResponseCode.OK,userService.getAllPermissionTag());
     }

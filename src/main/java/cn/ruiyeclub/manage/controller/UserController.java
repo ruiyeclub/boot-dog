@@ -31,7 +31,6 @@ public class UserController {
     @RequiresPermissions("system:user:list")
     @ApiOperation(value = "分页获取用户数据")
     @SysLogs("分页获取用户数据")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult get(@RequestBody @Validated @ApiParam(value = "用户获取过滤条件") PageParam pageParam){
         return ResponseResult.e(ResponseCode.OK,userService.getAllUserBySplitPage(pageParam));
     }
@@ -47,7 +46,6 @@ public class UserController {
     @RequiresPermissions("system:user:lock")
     @ApiOperation(value = "锁定用户")
     @SysLogs("锁定用户")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult lock(@PathVariable("id") @ApiParam(value = "用户标识ID") String id){
         userService.statusChange(id, 0);
         return ResponseResult.e(ResponseCode.OK);
@@ -57,7 +55,6 @@ public class UserController {
     @RequiresPermissions("system:user:unlock")
     @ApiOperation(value = "解锁用户")
     @SysLogs("解锁用户")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult unlock(@PathVariable("id") @ApiParam(value = "用户标识ID") String id){
         userService.statusChange(id, 1);
         return ResponseResult.e(ResponseCode.OK);
@@ -76,9 +73,8 @@ public class UserController {
     @RequiresPermissions("system:user:add")
     @ApiOperation(value = "添加用户")
     @SysLogs("添加用户")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
-    public ResponseResult add(@RequestBody @Validated @ApiParam(value = "用户数据") UserAddParam addDTO){
-        userService.add(addDTO);
+    public ResponseResult add(@RequestBody @Validated @ApiParam(value = "用户数据") UserAddParam addParam){
+        userService.add(addParam);
         return ResponseResult.e(ResponseCode.OK);
     }
 
@@ -86,7 +82,6 @@ public class UserController {
     @RequiresPermissions("system:user:update")
     @ApiOperation(value = "更新用户")
     @SysLogs("更新用户")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult update(@PathVariable("id") @ApiParam(value = "用户标识ID") String id,
                                  @RequestBody @Validated @ApiParam(value = "用户数据") UserUpdateParam updateDTO){
         userService.update(id,updateDTO);
@@ -97,7 +92,6 @@ public class UserController {
     @RequiresPermissions("system:user:resetPassword")
     @ApiOperation(value = "重置密码")
     @SysLogs("重置密码")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult resetPassword(@RequestBody
                                            @Validated @ApiParam(value = "用户及密码数据") ResetPasswordParam dto){
         userService.resetPassword(dto);

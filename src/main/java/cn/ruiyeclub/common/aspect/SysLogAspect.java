@@ -3,8 +3,8 @@ package cn.ruiyeclub.common.aspect;
 import cn.ruiyeclub.common.annotation.SysLogs;
 import cn.ruiyeclub.common.shiro.jwt.JwtToken;
 import cn.ruiyeclub.common.util.IpUtils;
-import cn.ruiyeclub.manage.dto.param.SignInParam;
 import cn.ruiyeclub.manage.dto.param.ResetPasswordParam;
+import cn.ruiyeclub.manage.dto.param.SignInParam;
 import cn.ruiyeclub.manage.dto.param.UserAddParam;
 import cn.ruiyeclub.manage.entity.SysLog;
 import cn.ruiyeclub.manage.service.SysLogService;
@@ -36,12 +36,8 @@ import java.util.Date;
 @Component
 public class SysLogAspect {
 
-    private final SysLogService sysLogService;
-
     @Autowired
-    public SysLogAspect(SysLogService sysLogService) {
-        this.sysLogService = sysLogService;
-    }
+    private SysLogService sysLogService;
 
     @Pointcut("@annotation(cn.ruiyeclub.common.annotation.SysLogs)")
     public void log(){}

@@ -35,7 +35,6 @@ public class RoleController{
     @PostMapping(value = {"/list"})
     @ApiOperation(value = "分页获取角色数据")
     @SysLogs("分页获取角色数据")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult get(@RequestBody @Validated @ApiParam(value = "用户获取过滤条件") FindRoleParam findRoleParam){
         return ResponseResult.e(ResponseCode.OK,sysRoleService.listPage(findRoleParam));
     }

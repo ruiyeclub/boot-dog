@@ -10,10 +10,9 @@ import java.io.IOException;
 /**
  * 处理跨域问题
  * @author Ray。
- * @version 1.0
  * @date 2020/5/23 15:51
  */
-@WebFilter(filterName = "CorsFilter ")
+@WebFilter(filterName = "CorsFilter")
 @Configuration
 public class CorsFilter implements Filter {
     @Override

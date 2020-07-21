@@ -13,8 +13,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Licoy
- * @version 2018/4/28/9:46
+ * @author Ray。
+ * @date 2018/4/28 9:46
  */
 public class IpUtils {
 

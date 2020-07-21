@@ -3,9 +3,9 @@ package cn.ruiyeclub.common.annotation;
 import java.lang.annotation.*;
 
 /**
- * @author Licoy
- * @version 2018/4/27/17:36
  * 系统日志
+ * @author Licoy
+ * @date 2018/4/27 17:36
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

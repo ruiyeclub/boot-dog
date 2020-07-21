@@ -33,7 +33,6 @@ public class LogController{
     @PostMapping("/remove")
     @RequiresPermissions("system:log:remove")
     @ApiOperation("批量删除")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult removeList(@RequestBody @ApiParam("ID集合") List<String> logList){
         sysLogService.remove(logList);
         return ResponseResult.e(ResponseCode.OK);
@@ -43,7 +42,6 @@ public class LogController{
     @RequiresPermissions("system:log:list")
     @ApiOperation(value = "获取所有的日志列表")
     @SysLogs("获取所有的资源列表")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult list(PageParam pageParam){
         return ResponseResult.e(ResponseCode.OK,sysLogService.listPage(pageParam));
     }

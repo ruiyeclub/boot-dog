@@ -32,7 +32,6 @@ public class ResourceController {
     @RequiresPermissions("system:resource:list")
     @ApiOperation(value = "获取所有的资源列表")
     @SysLogs("获取所有的资源列表")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult list(){
         return ResponseResult.e(ResponseCode.OK,resourceService.list());
     }
@@ -41,7 +40,6 @@ public class ResourceController {
     @RequiresPermissions("system:resource:add")
     @ApiOperation(value = "添加资源")
     @SysLogs("添加资源")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult add(@RequestBody @Validated @ApiParam("资源数据") ResourceParam resourceParam){
         resourceService.add(resourceParam);
         return ResponseResult.e(ResponseCode.OK);
@@ -51,7 +49,6 @@ public class ResourceController {
     @RequiresPermissions("system:resource:update")
     @ApiOperation(value = "添加资源")
     @SysLogs("添加资源")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult update(@PathVariable("id") @ApiParam("资源ID") String id,
                                  @RequestBody @Validated @ApiParam("资源数据") ResourceParam resourceParam){
         resourceService.update(id,resourceParam);
@@ -62,7 +59,6 @@ public class ResourceController {
     @RequiresPermissions("system:resource:remove")
     @ApiOperation(value = "删除资源")
     @SysLogs("删除资源")
-    @ApiImplicitParam(paramType = "header",name = "Authorization",value = "身份认证Token")
     public ResponseResult remove(@PathVariable("id") @ApiParam("资源ID") String id){
         resourceService.remove(id);
         return ResponseResult.e(ResponseCode.OK);
