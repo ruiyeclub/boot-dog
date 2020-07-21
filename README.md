@@ -1,4 +1,4 @@
-#### boot-dog：
+#### boot-dog：最简洁易上手的前后端分离后台管理系统
 ```
 boot-dog前身watchdog-framework，原地址https://github.com/watchdog-framework/watchdog-framework
     Spring Boot to 2.1.6
