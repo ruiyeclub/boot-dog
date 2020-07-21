@@ -37,5 +37,5 @@ server:
   port: 1000
 
 swagger:
-  enabled: flase
+  enabled: true
   pathMapping:
