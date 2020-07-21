@@ -37,13 +37,13 @@ public class DruidConfigurer {
         //bean.addUrlMappings(); 这个可以添加映射，我们在构造里已经写了
         //设置一些初始化参数
         Map<String, String> initParas = new HashMap<String, String>();
-        initParas.put("loginUsername", "admin");//它这个账户密码是固定的
+        initParas.put("loginUsername", "admin");
         initParas.put("loginPassword", "123456");
-        //允许谁能防伪
-        initParas.put("allow", "");//这个值为空或没有就允许所有人访问，ip白名单
+        //这个值为空或没有就允许所有人访问，ip白名单
+        initParas.put("allow", "");
         //initParas.put("allow","localhost");//只允许本机访问，多个ip用逗号,隔开
         //initParas.put("deny","");//ip黑名单，拒绝谁访问 deny和allow同时存在优先deny
-        initParas.put("resetEnable", "false");//禁用HTML页面的Reset按钮
+        initParas.put("resetEnable", "false");
         bean.setInitParameters(initParas);
         return bean;
     }

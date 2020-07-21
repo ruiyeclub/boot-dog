@@ -1,7 +1,7 @@
 #日志配置
 logging:
   level:
-    cn.ruiyeclub: debug
+    cn.ruiyeclub: error
 
 spring:
   datasource:

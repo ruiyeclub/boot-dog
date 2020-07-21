@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * mybatis-plus配置
+ * @author Ray。
  */
 @Configuration
 @MapperScan("cn.ruiyeclub.manage.mapper")

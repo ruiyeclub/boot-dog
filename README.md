@@ -4,13 +4,13 @@ boot-dog前身watchdog-framework，原地址https://github.com/watchdog-framewor
     Spring Boot to 2.1.6
     Mybatis-Plus to 3.3.2
     Shiro to 1.5.3
-    jedis to lettuce
+    Jedis to Lettuce
     HikariCP to Druid
     ...
 ```
 
 # 介绍
-`boot-dog`基于SpringBoot+Shiro+Mybatis-Plus+HikariCP+Redis+JWT+Vue+iView等开发的轻量级管理系统快速开发脚手架，拥有角色、用户、资源管理、权限数据同步更新等功能，并此项目会进行持续更新升级，欢迎使用，若对您有帮助请点击上方的star :beers: 。
+`boot-dog`基于SpringBoot+Shiro+Mybatis-Plus+Druid+Redis+JWT+Vue+iView等开发的轻量级管理系统快速开发脚手架，拥有角色、用户、资源管理、权限数据同步更新等功能，并此项目会进行持续更新升级，欢迎使用，若对您有帮助请点击上方的star :beers: 。
 
 # 部分界面展示
 
